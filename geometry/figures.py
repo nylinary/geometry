@@ -73,5 +73,5 @@ class Triangle(Figure):
     
     @property
     def is_right(self) -> bool:
-        sides = sorted([self.a, self.b, self.c], reverse=True)
+        sides = sorted([self.a, self.b, self.c])
         return sides.pop()**2 == sides.pop()**2 + sides.pop()**2
