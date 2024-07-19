@@ -6,22 +6,23 @@ from unittest.mock import patch
 
 class TestFigure:
     @pytest.mark.parametrize(
-        ("is_error", "args"),
+        ("is_error", "arg"),
         (
-            (False, ("1",)),
-            (False, ("1", 2, True)),
-            (False, (0, -1, False)),
-            (True, (3, "a", "1")),
-            (True, (sum, 12)),
+            (False, "1"),
+            (False, True),
+            (False, 0),
+            (False, False),
+            (True, "a"),
+            (True, sum),
         ),
     )
     @patch.multiple(Figure, __abstractmethods__=set())
-    def test__check_digit(self, is_error, args):
+    def test__to_digit(self, is_error, arg):
         if is_error:
             with pytest.raises(FigureError):
-                Figure()._check_digit("name", *args)
+                Figure()._to_digit(arg)
         else:
-            Figure()._check_digit("name", *args)
+            Figure()._to_digit(arg)
 
 
 class TestCircle:
