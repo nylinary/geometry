@@ -24,7 +24,7 @@ class Figure(ABC):
             try:
                 float(arg)
             except (ValueError, TypeError):
-                raise FigureError(f"{arg_name.capitalize()}={arg} must be a number") 
+                raise FigureError(f"{arg_name.capitalize()}={arg} must be a number")
 
 
 class Circle(Figure):
@@ -39,12 +39,12 @@ class Circle(Figure):
 
     @property
     def area(self) -> float:
-        return pi * self.radius ** 2
-    
+        return pi * self.radius**2
+
     @property
     def perimeter(self) -> float:
         return pi * self.radius * 2
-    
+
 
 class Triangle(Figure):
     def __init__(self, a: float, b: float, c: float) -> None:
@@ -55,23 +55,23 @@ class Triangle(Figure):
 
     def validate(self) -> None:
         self._check_digit("side", self.a, self.b, self.c)
-        if not all((self.a+self.b>self.c, self.a+self.c>self.b, self.b+self.c>self.a)):
+        if not all((self.a + self.b > self.c, self.a + self.c > self.b, self.b + self.c > self.a)):
             raise FigureError("Not valid triangle")
 
     @property
     def area(self) -> float:
-        p = self.perimeter/2
-        return sqrt(p*(p-self.a)*(p-self.b)*(p-self.c))
-    
+        p = self.perimeter / 2
+        return sqrt(p * (p - self.a) * (p - self.b) * (p - self.c))
+
     @property
     def perimeter(self) -> float:
         return self.a + self.b + self.c
-    
+
     @property
     def is_equilateral(self) -> bool:
         return self.a == self.b == self.c
-    
+
     @property
     def is_right(self) -> bool:
         sides = sorted([self.a, self.b, self.c])
-        return sides.pop()**2 == sides.pop()**2 + sides.pop()**2
+        return sides.pop() ** 2 == sides.pop() ** 2 + sides.pop() ** 2
